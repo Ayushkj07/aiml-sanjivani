@@ -18,10 +18,13 @@ import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FacultyRouteImport } from './routes/faculty'
 import { Route as DownloadsRouteImport } from './routes/downloads'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AchievementsRouteImport } from './routes/achievements'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EventsIndexRouteImport } from './routes/events.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as EventsIdRouteImport } from './routes/events.$id'
 
 const StudentCouncilRoute = StudentCouncilRouteImport.update({
@@ -69,6 +72,16 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AchievementsRoute = AchievementsRouteImport.update({
   id: '/achievements',
   path: '/achievements',
@@ -89,6 +102,11 @@ const EventsIndexRoute = EventsIndexRouteImport.update({
   path: '/events/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const EventsIdRoute = EventsIdRouteImport.update({
   id: '/events/$id',
   path: '/events/$id',
@@ -99,6 +117,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/achievements': typeof AchievementsRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/downloads': typeof DownloadsRoute
   '/faculty': typeof FacultyRoute
@@ -109,12 +129,14 @@ export interface FileRoutesByFullPath {
   '/research': typeof ResearchRoute
   '/student-council': typeof StudentCouncilRoute
   '/events/$id': typeof EventsIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/events/': typeof EventsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/achievements': typeof AchievementsRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/downloads': typeof DownloadsRoute
   '/faculty': typeof FacultyRoute
@@ -125,6 +147,7 @@ export interface FileRoutesByTo {
   '/research': typeof ResearchRoute
   '/student-council': typeof StudentCouncilRoute
   '/events/$id': typeof EventsIdRoute
+  '/admin': typeof AdminIndexRoute
   '/events': typeof EventsIndexRoute
 }
 export interface FileRoutesById {
@@ -132,6 +155,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/achievements': typeof AchievementsRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/downloads': typeof DownloadsRoute
   '/faculty': typeof FacultyRoute
@@ -142,6 +167,7 @@ export interface FileRoutesById {
   '/research': typeof ResearchRoute
   '/student-council': typeof StudentCouncilRoute
   '/events/$id': typeof EventsIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/events/': typeof EventsIndexRoute
 }
 export interface FileRouteTypes {
@@ -150,6 +176,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/achievements'
+    | '/admin'
+    | '/auth'
     | '/contact'
     | '/downloads'
     | '/faculty'
@@ -160,12 +188,14 @@ export interface FileRouteTypes {
     | '/research'
     | '/student-council'
     | '/events/$id'
+    | '/admin/'
     | '/events/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/achievements'
+    | '/auth'
     | '/contact'
     | '/downloads'
     | '/faculty'
@@ -176,12 +206,15 @@ export interface FileRouteTypes {
     | '/research'
     | '/student-council'
     | '/events/$id'
+    | '/admin'
     | '/events'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/achievements'
+    | '/admin'
+    | '/auth'
     | '/contact'
     | '/downloads'
     | '/faculty'
@@ -192,6 +225,7 @@ export interface FileRouteTypes {
     | '/research'
     | '/student-council'
     | '/events/$id'
+    | '/admin/'
     | '/events/'
   fileRoutesById: FileRoutesById
 }
@@ -199,6 +233,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AchievementsRoute: typeof AchievementsRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   DownloadsRoute: typeof DownloadsRoute
   FacultyRoute: typeof FacultyRoute
@@ -277,6 +313,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/achievements': {
       id: '/achievements'
       path: '/achievements'
@@ -305,6 +355,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/events/$id': {
       id: '/events/$id'
       path: '/events/$id'
@@ -315,10 +372,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AchievementsRoute: AchievementsRoute,
+  AdminRoute: AdminRouteWithChildren,
+  AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   DownloadsRoute: DownloadsRoute,
   FacultyRoute: FacultyRoute,

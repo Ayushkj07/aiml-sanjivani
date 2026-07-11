@@ -17,7 +17,7 @@ export const Route = createFileRoute("/admin")({
   component: AdminLayout,
 });
 
-const NAV = [
+const NAV: Array<{ to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }> = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/admin/site-content", label: "Site Content", icon: Settings },
   { to: "/admin/events", label: "Events", icon: Calendar },
@@ -30,7 +30,7 @@ const NAV = [
   { to: "/admin/news", label: "News", icon: Newspaper },
   { to: "/admin/notices", label: "Notices", icon: Bell },
   { to: "/admin/downloads", label: "Downloads", icon: FileDown },
-] as const;
+];
 
 function AdminLayout() {
   const { user } = Route.useRouteContext() as { user: { email?: string } };
