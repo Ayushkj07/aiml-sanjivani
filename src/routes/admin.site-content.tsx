@@ -44,14 +44,14 @@ function BlockEditor({ blockKey, label, description }: { blockKey: string; label
     let parsed: unknown;
     try { parsed = JSON.parse(text); } catch { toast.error("Invalid JSON"); return; }
     setSaving(true);
-    const { error } = await supabase.from("site_content").upsert({ key: k, value: parsed as never });
+    const { error } = await supabase.from("site_content").upsert({ key: blockKey, value: parsed as never });
     setSaving(false);
     if (error) toast.error(error.message);
     else { toast.success("Saved"); qc.invalidateQueries(); }
   }
 
   return (
-    <details className="rounded-lg border p-4" open={k === "home_hero"}>
+    <details className="rounded-lg border p-4" open={blockKey === "home_hero"}>
       <summary className="cursor-pointer font-semibold">{label} <span className="text-xs text-muted-foreground font-normal">— {description}</span></summary>
       <textarea value={text} onChange={(e) => setText(e.target.value)} rows={10} className="mt-3 w-full rounded-md border bg-background px-3 py-2 font-mono text-xs" />
       <div className="mt-2 flex justify-end">
