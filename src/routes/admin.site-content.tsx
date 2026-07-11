@@ -24,17 +24,17 @@ function SiteContentAdmin() {
       <h1 className="text-2xl font-bold">Site Content</h1>
       <p className="text-sm text-muted-foreground">Edit the editable text/image blocks used across the public site.</p>
       <div className="mt-6 space-y-4">
-        {BLOCKS.map((b) => <BlockEditor key={b.key} {...b} />)}
+        {BLOCKS.map((b) => <BlockEditor key={b.key} blockKey={b.key} label={b.label} description={b.description} />)}
       </div>
     </div>
   );
 }
 
-function BlockEditor({ key: k, label, description }: { key: string; label: string; description: string }) {
+function BlockEditor({ blockKey, label, description }: { blockKey: string; label: string; description: string }) {
   const qc = useQueryClient();
   const { data } = useQuery({
-    queryKey: ["site_content", k],
-    queryFn: async () => (await supabase.from("site_content").select("value").eq("key", k).maybeSingle()).data?.value ?? {},
+    queryKey: ["site_content", blockKey],
+    queryFn: async () => (await supabase.from("site_content").select("value").eq("key", blockKey).maybeSingle()).data?.value ?? {},
   });
   const [text, setText] = useState("");
   const [saving, setSaving] = useState(false);

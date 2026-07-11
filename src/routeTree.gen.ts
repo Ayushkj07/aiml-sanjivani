@@ -26,6 +26,17 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as EventsIndexRouteImport } from './routes/events.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as EventsIdRouteImport } from './routes/events.$id'
+import { Route as AdminStudentCouncilRouteImport } from './routes/admin.student-council'
+import { Route as AdminSiteContentRouteImport } from './routes/admin.site-content'
+import { Route as AdminResearchRouteImport } from './routes/admin.research'
+import { Route as AdminPlacementsRouteImport } from './routes/admin.placements'
+import { Route as AdminNoticesRouteImport } from './routes/admin.notices'
+import { Route as AdminNewsRouteImport } from './routes/admin.news'
+import { Route as AdminGalleryRouteImport } from './routes/admin.gallery'
+import { Route as AdminFacultyRouteImport } from './routes/admin.faculty'
+import { Route as AdminEventsRouteImport } from './routes/admin.events'
+import { Route as AdminDownloadsRouteImport } from './routes/admin.downloads'
+import { Route as AdminAchievementsRouteImport } from './routes/admin.achievements'
 
 const StudentCouncilRoute = StudentCouncilRouteImport.update({
   id: '/student-council',
@@ -112,6 +123,61 @@ const EventsIdRoute = EventsIdRouteImport.update({
   path: '/events/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminStudentCouncilRoute = AdminStudentCouncilRouteImport.update({
+  id: '/student-council',
+  path: '/student-council',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSiteContentRoute = AdminSiteContentRouteImport.update({
+  id: '/site-content',
+  path: '/site-content',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminResearchRoute = AdminResearchRouteImport.update({
+  id: '/research',
+  path: '/research',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPlacementsRoute = AdminPlacementsRouteImport.update({
+  id: '/placements',
+  path: '/placements',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminNoticesRoute = AdminNoticesRouteImport.update({
+  id: '/notices',
+  path: '/notices',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminNewsRoute = AdminNewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminGalleryRoute = AdminGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFacultyRoute = AdminFacultyRouteImport.update({
+  id: '/faculty',
+  path: '/faculty',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEventsRoute = AdminEventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDownloadsRoute = AdminDownloadsRouteImport.update({
+  id: '/downloads',
+  path: '/downloads',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAchievementsRoute = AdminAchievementsRouteImport.update({
+  id: '/achievements',
+  path: '/achievements',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -128,6 +194,17 @@ export interface FileRoutesByFullPath {
   '/placements': typeof PlacementsRoute
   '/research': typeof ResearchRoute
   '/student-council': typeof StudentCouncilRoute
+  '/admin/achievements': typeof AdminAchievementsRoute
+  '/admin/downloads': typeof AdminDownloadsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/faculty': typeof AdminFacultyRoute
+  '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/news': typeof AdminNewsRoute
+  '/admin/notices': typeof AdminNoticesRoute
+  '/admin/placements': typeof AdminPlacementsRoute
+  '/admin/research': typeof AdminResearchRoute
+  '/admin/site-content': typeof AdminSiteContentRoute
+  '/admin/student-council': typeof AdminStudentCouncilRoute
   '/events/$id': typeof EventsIdRoute
   '/admin/': typeof AdminIndexRoute
   '/events/': typeof EventsIndexRoute
@@ -146,6 +223,17 @@ export interface FileRoutesByTo {
   '/placements': typeof PlacementsRoute
   '/research': typeof ResearchRoute
   '/student-council': typeof StudentCouncilRoute
+  '/admin/achievements': typeof AdminAchievementsRoute
+  '/admin/downloads': typeof AdminDownloadsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/faculty': typeof AdminFacultyRoute
+  '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/news': typeof AdminNewsRoute
+  '/admin/notices': typeof AdminNoticesRoute
+  '/admin/placements': typeof AdminPlacementsRoute
+  '/admin/research': typeof AdminResearchRoute
+  '/admin/site-content': typeof AdminSiteContentRoute
+  '/admin/student-council': typeof AdminStudentCouncilRoute
   '/events/$id': typeof EventsIdRoute
   '/admin': typeof AdminIndexRoute
   '/events': typeof EventsIndexRoute
@@ -166,6 +254,17 @@ export interface FileRoutesById {
   '/placements': typeof PlacementsRoute
   '/research': typeof ResearchRoute
   '/student-council': typeof StudentCouncilRoute
+  '/admin/achievements': typeof AdminAchievementsRoute
+  '/admin/downloads': typeof AdminDownloadsRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/faculty': typeof AdminFacultyRoute
+  '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/news': typeof AdminNewsRoute
+  '/admin/notices': typeof AdminNoticesRoute
+  '/admin/placements': typeof AdminPlacementsRoute
+  '/admin/research': typeof AdminResearchRoute
+  '/admin/site-content': typeof AdminSiteContentRoute
+  '/admin/student-council': typeof AdminStudentCouncilRoute
   '/events/$id': typeof EventsIdRoute
   '/admin/': typeof AdminIndexRoute
   '/events/': typeof EventsIndexRoute
@@ -187,6 +286,17 @@ export interface FileRouteTypes {
     | '/placements'
     | '/research'
     | '/student-council'
+    | '/admin/achievements'
+    | '/admin/downloads'
+    | '/admin/events'
+    | '/admin/faculty'
+    | '/admin/gallery'
+    | '/admin/news'
+    | '/admin/notices'
+    | '/admin/placements'
+    | '/admin/research'
+    | '/admin/site-content'
+    | '/admin/student-council'
     | '/events/$id'
     | '/admin/'
     | '/events/'
@@ -205,6 +315,17 @@ export interface FileRouteTypes {
     | '/placements'
     | '/research'
     | '/student-council'
+    | '/admin/achievements'
+    | '/admin/downloads'
+    | '/admin/events'
+    | '/admin/faculty'
+    | '/admin/gallery'
+    | '/admin/news'
+    | '/admin/notices'
+    | '/admin/placements'
+    | '/admin/research'
+    | '/admin/site-content'
+    | '/admin/student-council'
     | '/events/$id'
     | '/admin'
     | '/events'
@@ -224,6 +345,17 @@ export interface FileRouteTypes {
     | '/placements'
     | '/research'
     | '/student-council'
+    | '/admin/achievements'
+    | '/admin/downloads'
+    | '/admin/events'
+    | '/admin/faculty'
+    | '/admin/gallery'
+    | '/admin/news'
+    | '/admin/notices'
+    | '/admin/placements'
+    | '/admin/research'
+    | '/admin/site-content'
+    | '/admin/student-council'
     | '/events/$id'
     | '/admin/'
     | '/events/'
@@ -369,14 +501,113 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/student-council': {
+      id: '/admin/student-council'
+      path: '/student-council'
+      fullPath: '/admin/student-council'
+      preLoaderRoute: typeof AdminStudentCouncilRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/site-content': {
+      id: '/admin/site-content'
+      path: '/site-content'
+      fullPath: '/admin/site-content'
+      preLoaderRoute: typeof AdminSiteContentRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/research': {
+      id: '/admin/research'
+      path: '/research'
+      fullPath: '/admin/research'
+      preLoaderRoute: typeof AdminResearchRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/placements': {
+      id: '/admin/placements'
+      path: '/placements'
+      fullPath: '/admin/placements'
+      preLoaderRoute: typeof AdminPlacementsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/notices': {
+      id: '/admin/notices'
+      path: '/notices'
+      fullPath: '/admin/notices'
+      preLoaderRoute: typeof AdminNoticesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/news': {
+      id: '/admin/news'
+      path: '/news'
+      fullPath: '/admin/news'
+      preLoaderRoute: typeof AdminNewsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/gallery': {
+      id: '/admin/gallery'
+      path: '/gallery'
+      fullPath: '/admin/gallery'
+      preLoaderRoute: typeof AdminGalleryRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/faculty': {
+      id: '/admin/faculty'
+      path: '/faculty'
+      fullPath: '/admin/faculty'
+      preLoaderRoute: typeof AdminFacultyRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/events': {
+      id: '/admin/events'
+      path: '/events'
+      fullPath: '/admin/events'
+      preLoaderRoute: typeof AdminEventsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/downloads': {
+      id: '/admin/downloads'
+      path: '/downloads'
+      fullPath: '/admin/downloads'
+      preLoaderRoute: typeof AdminDownloadsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/achievements': {
+      id: '/admin/achievements'
+      path: '/achievements'
+      fullPath: '/admin/achievements'
+      preLoaderRoute: typeof AdminAchievementsRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminAchievementsRoute: typeof AdminAchievementsRoute
+  AdminDownloadsRoute: typeof AdminDownloadsRoute
+  AdminEventsRoute: typeof AdminEventsRoute
+  AdminFacultyRoute: typeof AdminFacultyRoute
+  AdminGalleryRoute: typeof AdminGalleryRoute
+  AdminNewsRoute: typeof AdminNewsRoute
+  AdminNoticesRoute: typeof AdminNoticesRoute
+  AdminPlacementsRoute: typeof AdminPlacementsRoute
+  AdminResearchRoute: typeof AdminResearchRoute
+  AdminSiteContentRoute: typeof AdminSiteContentRoute
+  AdminStudentCouncilRoute: typeof AdminStudentCouncilRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAchievementsRoute: AdminAchievementsRoute,
+  AdminDownloadsRoute: AdminDownloadsRoute,
+  AdminEventsRoute: AdminEventsRoute,
+  AdminFacultyRoute: AdminFacultyRoute,
+  AdminGalleryRoute: AdminGalleryRoute,
+  AdminNewsRoute: AdminNewsRoute,
+  AdminNoticesRoute: AdminNoticesRoute,
+  AdminPlacementsRoute: AdminPlacementsRoute,
+  AdminResearchRoute: AdminResearchRoute,
+  AdminSiteContentRoute: AdminSiteContentRoute,
+  AdminStudentCouncilRoute: AdminStudentCouncilRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
