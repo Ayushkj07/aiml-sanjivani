@@ -37,11 +37,11 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
-        <Link to="/" className="flex items-center gap-2">
-          <img src="/aiml-logo.png" alt="Sanjivani University — Department of AIML" className="size-10 object-contain" />
+        <Link to="/" className="flex items-center gap-3">
+          <img src="/aiml-logo.png" alt="Sanjivani University — Department of AIML" className="size-14 object-contain" />
           <div className="hidden sm:block">
-            <div className="text-sm font-semibold leading-tight">AI & ML Department</div>
-            <div className="text-xs text-muted-foreground leading-tight">Activity Portal</div>
+            <div className="text-base font-semibold leading-tight">AI & ML Department</div>
+            <div className="text-sm text-muted-foreground leading-tight">Activity Portal</div>
           </div>
         </Link>
         <nav className="hidden lg:flex items-center gap-1">
