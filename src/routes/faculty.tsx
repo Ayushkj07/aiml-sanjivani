@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { PageHeader, Section, EmptyState } from "@/components/site/Layout";
-import { Mail, Phone } from "lucide-react";
 
 export const Route = createFileRoute("/faculty")({
   head: () => ({ meta: [{ title: "Faculty | AI & ML Department" }, { name: "description", content: "Meet the faculty of the Department of AI & ML." }] }),
@@ -12,7 +11,11 @@ export const Route = createFileRoute("/faculty")({
 function FacultyPage() {
   const { data, isLoading } = useQuery({
     queryKey: ["faculty", "public"],
-    queryFn: async () => (await supabase.from("faculty").select("*").eq("is_visible", true).order("sort_order")).data ?? [],
+    queryFn: async () => (await supabase
+      .from("faculty")
+      .select("id, name, designation, qualification, research_area, photo_url, sort_order")
+      .eq("is_visible", true)
+      .order("sort_order")).data ?? [],
   });
   return (
     <>
@@ -27,10 +30,6 @@ function FacultyPage() {
                 {f.designation && <p className="text-sm text-primary">{f.designation}</p>}
                 {f.qualification && <p className="text-sm text-muted-foreground mt-1">{f.qualification}</p>}
                 {f.research_area && <p className="text-sm text-muted-foreground mt-1"><span className="font-medium">Research:</span> {f.research_area}</p>}
-                <div className="mt-3 space-y-1 text-sm">
-                  {f.email && <a href={`mailto:${f.email}`} className="flex items-center gap-2 text-muted-foreground hover:text-primary"><Mail className="size-3.5" />{f.email}</a>}
-                  {f.phone && <a href={`tel:${f.phone}`} className="flex items-center gap-2 text-muted-foreground hover:text-primary"><Phone className="size-3.5" />{f.phone}</a>}
-                </div>
               </div>
             ))}
           </div>
@@ -39,3 +38,4 @@ function FacultyPage() {
     </>
   );
 }
+
