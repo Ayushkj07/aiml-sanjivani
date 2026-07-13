@@ -102,7 +102,11 @@ function RecordDialog({ table, fields, initial, onClose }: { table: string; fiel
     const payload: Record<string, unknown> = {};
     for (const f of fields) {
       let v = form[f.name];
-      if (v === "" || v === undefined) v = null;
+      if (v === "" || v === undefined) {
+        // Skip empty values so DB defaults apply (e.g. sort_order NOT NULL default 0)
+        if (!initial) continue;
+        v = null;
+      }
       if (f.type === "number" && v !== null) v = Number(v);
       payload[f.name] = v;
     }
