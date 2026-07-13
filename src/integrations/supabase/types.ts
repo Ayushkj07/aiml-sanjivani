@@ -457,39 +457,7 @@ export type Database = {
       }
     }
     Views: {
-      faculty_public: {
-        Row: {
-          designation: string | null
-          id: string | null
-          is_visible: boolean | null
-          name: string | null
-          photo_url: string | null
-          qualification: string | null
-          research_area: string | null
-          sort_order: number | null
-        }
-        Insert: {
-          designation?: string | null
-          id?: string | null
-          is_visible?: boolean | null
-          name?: string | null
-          photo_url?: string | null
-          qualification?: string | null
-          research_area?: string | null
-          sort_order?: number | null
-        }
-        Update: {
-          designation?: string | null
-          id?: string | null
-          is_visible?: boolean | null
-          name?: string | null
-          photo_url?: string | null
-          qualification?: string | null
-          research_area?: string | null
-          sort_order?: number | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       [_ in never]: never
