@@ -317,7 +317,6 @@ export type Database = {
           email: string | null
           full_name: string | null
           id: string
-          role: string | null
           updated_at: string
         }
         Insert: {
@@ -325,7 +324,6 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id: string
-          role?: string | null
           updated_at?: string
         }
         Update: {
@@ -333,7 +331,6 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id?: string
-          role?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -460,18 +457,42 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      faculty_public: {
+        Row: {
+          designation: string | null
+          id: string | null
+          is_visible: boolean | null
+          name: string | null
+          photo_url: string | null
+          qualification: string | null
+          research_area: string | null
+          sort_order: number | null
+        }
+        Insert: {
+          designation?: string | null
+          id?: string | null
+          is_visible?: boolean | null
+          name?: string | null
+          photo_url?: string | null
+          qualification?: string | null
+          research_area?: string | null
+          sort_order?: number | null
+        }
+        Update: {
+          designation?: string | null
+          id?: string | null
+          is_visible?: boolean | null
+          name?: string | null
+          photo_url?: string | null
+          qualification?: string | null
+          research_area?: string | null
+          sort_order?: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      has_role:
-        | {
-            Args: {
-              _role: Database["public"]["Enums"]["app_role"]
-              _user_id: string
-            }
-            Returns: boolean
-          }
-        | { Args: { required_role: string }; Returns: boolean }
+      [_ in never]: never
     }
     Enums: {
       app_role: "admin"
