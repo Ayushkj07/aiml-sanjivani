@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Section } from "@/components/site/Layout";
-import { ArrowRight, Calendar, Users, Award, BookOpen } from "lucide-react";
+import { GallerySlider } from "@/components/site/GallerySlider";
+import { ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -18,7 +19,7 @@ function Home() {
   const { data: content } = useQuery({
     queryKey: ["site_content", "home"],
     queryFn: async () => {
-      const { data } = await supabase.from("site_content").select("key,value").in("key", ["home_hero", "about", "vision", "mission", "hod"]);
+      const { data } = await supabase.from("site_content").select("key,value").in("key", ["home_hero", "hod"]);
       return Object.fromEntries((data ?? []).map((r) => [r.key, r.value as Record<string, unknown>]));
     },
   });
@@ -32,9 +33,6 @@ function Home() {
   });
 
   const hero = (content?.home_hero ?? {}) as { title?: string; subtitle?: string; cta_text?: string; cta_link?: string; background_image?: string };
-  const about = (content?.about ?? {}) as { title?: string; body?: string };
-  const vision = (content?.vision ?? {}) as { title?: string; body?: string };
-  const mission = (content?.mission ?? {}) as { title?: string; items?: string[] };
   const hod = (content?.hod ?? {}) as { name?: string; designation?: string; message?: string; photo_url?: string; qualification?: string };
 
   return (
@@ -58,39 +56,16 @@ function Home() {
         </div>
       </section>
 
-      {/* Quick links */}
+      {/* Gallery Slider */}
       <Section>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { icon: Users, label: "Faculty", to: "/faculty", desc: "Meet our expert educators" },
-            { icon: Calendar, label: "Events", to: "/events", desc: "Latest department events" },
-            { icon: Award, label: "Achievements", to: "/achievements", desc: "Student & faculty wins" },
-            { icon: BookOpen, label: "Research", to: "/research", desc: "Papers & publications" },
-          ].map((c) => (
-            <Link key={c.to} to={c.to} className="group rounded-lg border p-5 transition hover:border-primary hover:shadow-sm">
-              <c.icon className="size-6 text-primary" />
-              <div className="mt-3 font-semibold">{c.label}</div>
-              <div className="text-sm text-muted-foreground">{c.desc}</div>
-            </Link>
-          ))}
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold">Gallery</h2>
+            <p className="text-sm text-muted-foreground mt-1">Moments from our department events and activities.</p>
+          </div>
+          <Link to="/gallery" className="text-sm text-primary hidden sm:inline">View all →</Link>
         </div>
-      </Section>
-
-      {/* About */}
-      <Section className="grid gap-10 md:grid-cols-2 md:items-center">
-        <div>
-          <h2 className="text-2xl md:text-3xl font-bold">{about.title || "About the Department"}</h2>
-          <p className="mt-4 text-muted-foreground whitespace-pre-line">{about.body}</p>
-          <Link to="/about" className="mt-6 inline-flex items-center gap-2 text-primary font-medium">Read more <ArrowRight className="size-4" /></Link>
-        </div>
-        <div className="rounded-lg border bg-secondary/40 p-8">
-          <h3 className="font-semibold text-lg">{vision.title || "Our Vision"}</h3>
-          <p className="mt-2 text-sm text-muted-foreground">{vision.body}</p>
-          <h3 className="mt-6 font-semibold text-lg">{mission.title || "Our Mission"}</h3>
-          <ul className="mt-2 space-y-1 text-sm text-muted-foreground list-disc list-inside">
-            {(mission.items ?? []).map((m, i) => <li key={i}>{m}</li>)}
-          </ul>
-        </div>
+        <GallerySlider />
       </Section>
 
       {/* HOD */}
