@@ -193,10 +193,11 @@ function FieldInput({ field, value, onChange }: { field: Field; value: unknown; 
         </div>
       ) : (
         <input
-          type={field.type === "date" ? "date" : field.type === "number" ? "number" : "text"}
+          type={field.type === "date" ? "date" : field.type === "number" ? "number" : field.type === "url" ? "url" : "text"}
           value={v as string | number}
           onChange={(e) => onChange(e.target.value)}
           required={field.required}
+          placeholder={field.placeholder}
           className="mt-1 w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
         />
       )}
