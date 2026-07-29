@@ -103,12 +103,19 @@ function RecordDialog({ table, fields, initial, onClose }: { table: string; fiel
     const payload: Record<string, unknown> = {};
     for (const f of fields) {
       let v = form[f.name];
+      if (f.type === "checkbox") { payload[f.name] = !!v; continue; }
       if (v === "" || v === undefined) {
-        // Skip empty values so DB defaults apply (e.g. sort_order NOT NULL default 0)
         if (!initial) continue;
         v = null;
       }
       if (f.type === "number" && v !== null) v = Number(v);
+      if (f.type === "url" && v) {
+        try { new URL(String(v)); } catch {
+          setSaving(false);
+          toast.error(`${f.label}: please enter a valid URL (including https://)`);
+          return;
+        }
+      }
       payload[f.name] = v;
     }
     const op = initial
