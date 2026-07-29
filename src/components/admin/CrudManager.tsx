@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2, Eye, EyeOff, Upload, X, Loader2 } from "lucide-react";
 
-export type FieldType = "text" | "textarea" | "number" | "date" | "image" | "file" | "select" | "checkbox";
+export type FieldType = "text" | "textarea" | "number" | "date" | "image" | "file" | "select" | "checkbox" | "url";
 export type Field = {
   name: string;
   label: string;
@@ -13,6 +13,7 @@ export type Field = {
   options?: { value: string; label: string }[];
   bucket?: "images" | "documents";
   accept?: string;
+  placeholder?: string;
 };
 
 type Row = Record<string, unknown> & { id: string; is_visible?: boolean };
@@ -102,12 +103,19 @@ function RecordDialog({ table, fields, initial, onClose }: { table: string; fiel
     const payload: Record<string, unknown> = {};
     for (const f of fields) {
       let v = form[f.name];
+      if (f.type === "checkbox") { payload[f.name] = !!v; continue; }
       if (v === "" || v === undefined) {
-        // Skip empty values so DB defaults apply (e.g. sort_order NOT NULL default 0)
         if (!initial) continue;
         v = null;
       }
       if (f.type === "number" && v !== null) v = Number(v);
+      if (f.type === "url" && v) {
+        try { new URL(String(v)); } catch {
+          setSaving(false);
+          toast.error(`${f.label}: please enter a valid URL (including https://)`);
+          return;
+        }
+      }
       payload[f.name] = v;
     }
     const op = initial
@@ -185,10 +193,11 @@ function FieldInput({ field, value, onChange }: { field: Field; value: unknown; 
         </div>
       ) : (
         <input
-          type={field.type === "date" ? "date" : field.type === "number" ? "number" : "text"}
+          type={field.type === "date" ? "date" : field.type === "number" ? "number" : field.type === "url" ? "url" : "text"}
           value={v as string | number}
           onChange={(e) => onChange(e.target.value)}
           required={field.required}
+          placeholder={field.placeholder}
           className="mt-1 w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
         />
       )}
