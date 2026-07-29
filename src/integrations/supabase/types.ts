@@ -97,7 +97,12 @@ export type Database = {
           id: string
           images: string[]
           is_visible: boolean
+          open_in_new_tab: boolean
           poster_url: string | null
+          registration_button_text: string
+          registration_deadline: string | null
+          registration_enabled: boolean
+          registration_url: string | null
           sort_order: number
           title: string
           updated_at: string
@@ -110,7 +115,12 @@ export type Database = {
           id?: string
           images?: string[]
           is_visible?: boolean
+          open_in_new_tab?: boolean
           poster_url?: string | null
+          registration_button_text?: string
+          registration_deadline?: string | null
+          registration_enabled?: boolean
+          registration_url?: string | null
           sort_order?: number
           title: string
           updated_at?: string
@@ -123,7 +133,12 @@ export type Database = {
           id?: string
           images?: string[]
           is_visible?: boolean
+          open_in_new_tab?: boolean
           poster_url?: string | null
+          registration_button_text?: string
+          registration_deadline?: string | null
+          registration_enabled?: boolean
+          registration_url?: string | null
           sort_order?: number
           title?: string
           updated_at?: string
