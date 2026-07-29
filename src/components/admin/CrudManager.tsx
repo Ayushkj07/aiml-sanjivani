@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2, Eye, EyeOff, Upload, X, Loader2 } from "lucide-react";
 
-export type FieldType = "text" | "textarea" | "number" | "date" | "image" | "file" | "select" | "checkbox";
+export type FieldType = "text" | "textarea" | "number" | "date" | "image" | "file" | "select" | "checkbox" | "url";
 export type Field = {
   name: string;
   label: string;
@@ -13,6 +13,7 @@ export type Field = {
   options?: { value: string; label: string }[];
   bucket?: "images" | "documents";
   accept?: string;
+  placeholder?: string;
 };
 
 type Row = Record<string, unknown> & { id: string; is_visible?: boolean };
