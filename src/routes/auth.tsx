@@ -7,11 +7,22 @@ import { Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({ meta: [{ title: "Sign in | AI & ML Department" }] }),
+  validateSearch: (s: Record<string, unknown>) => ({
+    next: typeof s.next === "string" ? s.next : undefined,
+  }),
   component: AuthPage,
 });
 
+/** Only same-origin relative paths are accepted as a post-login redirect. */
+function safeNext(next?: string) {
+  if (!next || !next.startsWith("/") || next.startsWith("//")) return undefined;
+  return next;
+}
+
 function AuthPage() {
   const navigate = useNavigate();
+  const { next } = Route.useSearch();
+  const redirectTo = safeNext(next);
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,16 +31,19 @@ function AuthPage() {
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
-      if (data.user) navigate({ to: "/admin", replace: true });
+      if (!data.user) return;
+      if (redirectTo) { window.location.replace(redirectTo); return; }
+      navigate({ to: "/admin", replace: true });
     });
-  }, [navigate]);
+  }, [navigate, redirectTo]);
 
   async function handleGoogle() {
     setLoading(true);
     try {
-      const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
+      const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: redirectTo ? window.location.origin + redirectTo : window.location.origin });
       if (result.error) { toast.error(result.error.message || "Google sign-in failed"); setLoading(false); return; }
       if (result.redirected) return;
+      if (redirectTo) { window.location.assign(redirectTo); return; }
       navigate({ to: "/admin" });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Google sign-in failed");
@@ -44,7 +58,7 @@ function AuthPage() {
       if (mode === "signup") {
         const { error } = await supabase.auth.signUp({
           email, password,
-          options: { emailRedirectTo: window.location.origin, data: { full_name: fullName } },
+          options: { emailRedirectTo: redirectTo ? window.location.origin + redirectTo : window.location.origin, data: { full_name: fullName } },
         });
         if (error) throw error;
         toast.success("Account created. You are now signed in.");
@@ -53,6 +67,7 @@ function AuthPage() {
         if (error) throw error;
         toast.success("Welcome back!");
       }
+      if (redirectTo) { window.location.assign(redirectTo); return; }
       navigate({ to: "/admin" });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Authentication failed");
