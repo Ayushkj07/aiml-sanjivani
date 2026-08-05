@@ -14,6 +14,7 @@ import { Route as ResearchRouteImport } from './routes/research'
 import { Route as PlacementsRouteImport } from './routes/placements'
 import { Route as NoticesRouteImport } from './routes/notices'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FacultyRouteImport } from './routes/faculty'
 import { Route as DownloadsRouteImport } from './routes/downloads'
@@ -37,6 +38,10 @@ import { Route as AdminFacultyRouteImport } from './routes/admin.faculty'
 import { Route as AdminEventsRouteImport } from './routes/admin.events'
 import { Route as AdminDownloadsRouteImport } from './routes/admin.downloads'
 import { Route as AdminAchievementsRouteImport } from './routes/admin.achievements'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
+import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 
 const StudentCouncilRoute = StudentCouncilRouteImport.update({
   id: '/student-council',
@@ -61,6 +66,11 @@ const NoticesRoute = NoticesRouteImport.update({
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -178,6 +188,29 @@ const AdminAchievementsRoute = AdminAchievementsRouteImport.update({
   path: '/achievements',
   getParentRoute: () => AdminRoute,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -189,11 +222,14 @@ export interface FileRoutesByFullPath {
   '/downloads': typeof DownloadsRoute
   '/faculty': typeof FacultyRoute
   '/gallery': typeof GalleryRoute
+  '/mcp': typeof McpRoute
   '/news': typeof NewsRoute
   '/notices': typeof NoticesRoute
   '/placements': typeof PlacementsRoute
   '/research': typeof ResearchRoute
   '/student-council': typeof StudentCouncilRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/achievements': typeof AdminAchievementsRoute
   '/admin/downloads': typeof AdminDownloadsRoute
   '/admin/events': typeof AdminEventsRoute
@@ -208,6 +244,8 @@ export interface FileRoutesByFullPath {
   '/events/$id': typeof EventsIdRoute
   '/admin/': typeof AdminIndexRoute
   '/events/': typeof EventsIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -218,11 +256,14 @@ export interface FileRoutesByTo {
   '/downloads': typeof DownloadsRoute
   '/faculty': typeof FacultyRoute
   '/gallery': typeof GalleryRoute
+  '/mcp': typeof McpRoute
   '/news': typeof NewsRoute
   '/notices': typeof NoticesRoute
   '/placements': typeof PlacementsRoute
   '/research': typeof ResearchRoute
   '/student-council': typeof StudentCouncilRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/achievements': typeof AdminAchievementsRoute
   '/admin/downloads': typeof AdminDownloadsRoute
   '/admin/events': typeof AdminEventsRoute
@@ -237,6 +278,8 @@ export interface FileRoutesByTo {
   '/events/$id': typeof EventsIdRoute
   '/admin': typeof AdminIndexRoute
   '/events': typeof EventsIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -249,11 +292,14 @@ export interface FileRoutesById {
   '/downloads': typeof DownloadsRoute
   '/faculty': typeof FacultyRoute
   '/gallery': typeof GalleryRoute
+  '/mcp': typeof McpRoute
   '/news': typeof NewsRoute
   '/notices': typeof NoticesRoute
   '/placements': typeof PlacementsRoute
   '/research': typeof ResearchRoute
   '/student-council': typeof StudentCouncilRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/achievements': typeof AdminAchievementsRoute
   '/admin/downloads': typeof AdminDownloadsRoute
   '/admin/events': typeof AdminEventsRoute
@@ -268,6 +314,8 @@ export interface FileRoutesById {
   '/events/$id': typeof EventsIdRoute
   '/admin/': typeof AdminIndexRoute
   '/events/': typeof EventsIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -281,11 +329,14 @@ export interface FileRouteTypes {
     | '/downloads'
     | '/faculty'
     | '/gallery'
+    | '/mcp'
     | '/news'
     | '/notices'
     | '/placements'
     | '/research'
     | '/student-council'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/achievements'
     | '/admin/downloads'
     | '/admin/events'
@@ -300,6 +351,8 @@ export interface FileRouteTypes {
     | '/events/$id'
     | '/admin/'
     | '/events/'
+    | '/.lovable/oauth/consent'
+    | '/.mcp/invoke-tool/$tool'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -310,11 +363,14 @@ export interface FileRouteTypes {
     | '/downloads'
     | '/faculty'
     | '/gallery'
+    | '/mcp'
     | '/news'
     | '/notices'
     | '/placements'
     | '/research'
     | '/student-council'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/achievements'
     | '/admin/downloads'
     | '/admin/events'
@@ -329,6 +385,8 @@ export interface FileRouteTypes {
     | '/events/$id'
     | '/admin'
     | '/events'
+    | '/.lovable/oauth/consent'
+    | '/.mcp/invoke-tool/$tool'
   id:
     | '__root__'
     | '/'
@@ -340,11 +398,14 @@ export interface FileRouteTypes {
     | '/downloads'
     | '/faculty'
     | '/gallery'
+    | '/mcp'
     | '/news'
     | '/notices'
     | '/placements'
     | '/research'
     | '/student-council'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/achievements'
     | '/admin/downloads'
     | '/admin/events'
@@ -359,6 +420,8 @@ export interface FileRouteTypes {
     | '/events/$id'
     | '/admin/'
     | '/events/'
+    | '/.lovable/oauth/consent'
+    | '/.mcp/invoke-tool/$tool'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -371,13 +434,18 @@ export interface RootRouteChildren {
   DownloadsRoute: typeof DownloadsRoute
   FacultyRoute: typeof FacultyRoute
   GalleryRoute: typeof GalleryRoute
+  McpRoute: typeof McpRoute
   NewsRoute: typeof NewsRoute
   NoticesRoute: typeof NoticesRoute
   PlacementsRoute: typeof PlacementsRoute
   ResearchRoute: typeof ResearchRoute
   StudentCouncilRoute: typeof StudentCouncilRoute
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   EventsIdRoute: typeof EventsIdRoute
   EventsIndexRoute: typeof EventsIndexRoute
+  DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -415,6 +483,13 @@ declare module '@tanstack/react-router' {
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -578,6 +653,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAchievementsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.lovable/oauth/consent': {
+      id: '/.lovable/oauth/consent'
+      path: '/.lovable/oauth/consent'
+      fullPath: '/.lovable/oauth/consent'
+      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -623,14 +726,30 @@ const rootRouteChildren: RootRouteChildren = {
   DownloadsRoute: DownloadsRoute,
   FacultyRoute: FacultyRoute,
   GalleryRoute: GalleryRoute,
+  McpRoute: McpRoute,
   NewsRoute: NewsRoute,
   NoticesRoute: NoticesRoute,
   PlacementsRoute: PlacementsRoute,
   ResearchRoute: ResearchRoute,
   StudentCouncilRoute: StudentCouncilRoute,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   EventsIdRoute: EventsIdRoute,
   EventsIndexRoute: EventsIndexRoute,
+  DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

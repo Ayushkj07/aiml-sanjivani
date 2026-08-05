@@ -1,0 +1,287 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.1",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://emmrfxkdvpbsgolztsrh.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "department-hub",
+      "version": "0.1.0",
+      "title": "Department Hub"
+    },
+    "tools": [
+      {
+        "name": "list_events",
+        "title": "List department events",
+        "description": "List AI & ML department events, newest first, including registration link details.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20,
+              "description": "Maximum number of events to return."
+            },
+            "include_hidden": {
+              "type": "boolean",
+              "default": false,
+              "description": "Include events that are hidden from the public site."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_event",
+        "title": "Get an event",
+        "description": "Fetch one department event by its id, including all registration fields.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Event id."
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "create_event",
+        "title": "Create an event",
+        "description": "Create a department event. Requires an admin account.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Event title."
+            },
+            "description": {
+              "type": "string",
+              "description": "Event description."
+            },
+            "event_date": {
+              "type": "string",
+              "description": "Event date as YYYY-MM-DD."
+            },
+            "venue": {
+              "type": "string",
+              "description": "Venue."
+            },
+            "registration_url": {
+              "type": "string",
+              "format": "uri",
+              "description": "Registration / apply link."
+            },
+            "registration_button_text": {
+              "type": "string",
+              "description": "Button label, defaults to Apply Now."
+            },
+            "registration_deadline": {
+              "type": "string",
+              "description": "Registration deadline as YYYY-MM-DD."
+            },
+            "registration_enabled": {
+              "type": "boolean",
+              "description": "Whether the registration button shows publicly."
+            },
+            "is_visible": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether the event is visible on the public site."
+            }
+          },
+          "required": [
+            "title"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_notices",
+        "title": "List notices",
+        "description": "List department notices with their attached file links, newest first.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20,
+              "description": "Maximum number of notices to return."
+            },
+            "include_hidden": {
+              "type": "boolean",
+              "default": false,
+              "description": "Include unpublished/hidden notices."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "create_notice",
+        "title": "Create a notice",
+        "description": "Publish a department notice. Requires an admin account. Notices are hidden until is_visible is true.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Notice title."
+            },
+            "description": {
+              "type": "string",
+              "description": "Notice body text."
+            },
+            "file_url": {
+              "type": "string",
+              "format": "uri",
+              "description": "Public URL of an attached PDF or document."
+            },
+            "is_visible": {
+              "type": "boolean",
+              "default": false,
+              "description": "Publish immediately on the public site."
+            }
+          },
+          "required": [
+            "title"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_news",
+        "title": "List news posts",
+        "description": "List department news posts, newest first.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20,
+              "description": "Maximum number of posts to return."
+            },
+            "include_hidden": {
+              "type": "boolean",
+              "default": false,
+              "description": "Include hidden posts."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_faculty",
+        "title": "List faculty",
+        "description": "List AI & ML department faculty members with designation, qualification and research area.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50,
+              "description": "Maximum number of faculty to return."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_achievements",
+        "title": "List achievements",
+        "description": "List department achievements with category and date.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20,
+              "description": "Maximum number of achievements to return."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
