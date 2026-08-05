@@ -20,7 +20,9 @@ export default defineTool({
   annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
   handler: async (input, ctx) => {
     const supabase = client(ctx);
-    const payload = Object.fromEntries(Object.entries(input).filter(([, v]) => v !== undefined && v !== ""));
+    const payload = Object.fromEntries(
+      Object.entries(input).filter(([, v]) => v !== undefined && v !== ""),
+    ) as Record<string, never>;
     const { data, error } = await supabase.from("events").insert(payload).select().single();
     assertOk(error);
     return json(data, { event: data as Record<string, unknown> });
