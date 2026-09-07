@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet, redirect, Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { LogOut, LayoutDashboard, Calendar, Image, Users, UserSquare2, Award, Briefcase, BookOpen, Newspaper, Bell, FileDown, Settings } from "lucide-react";
+import { LogOut, LayoutDashboard, Calendar, Image, Users, UserSquare2, Award, Briefcase, BookOpen, Newspaper, Bell, FileDown, Settings, GraduationCap } from "lucide-react";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 
