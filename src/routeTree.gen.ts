@@ -28,6 +28,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as EventsIndexRouteImport } from './routes/events.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as EventsIdRouteImport } from './routes/events.$id'
+import { Route as AdminSubjectsRouteImport } from './routes/admin.subjects'
 import { Route as AdminStudentCouncilRouteImport } from './routes/admin.student-council'
 import { Route as AdminSiteContentRouteImport } from './routes/admin.site-content'
 import { Route as AdminResearchRouteImport } from './routes/admin.research'
@@ -139,6 +140,11 @@ const EventsIdRoute = EventsIdRouteImport.update({
   path: '/events/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminSubjectsRoute = AdminSubjectsRouteImport.update({
+  id: '/subjects',
+  path: '/subjects',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminStudentCouncilRoute = AdminStudentCouncilRouteImport.update({
   id: '/student-council',
   path: '/student-council',
@@ -248,6 +254,7 @@ export interface FileRoutesByFullPath {
   '/admin/research': typeof AdminResearchRoute
   '/admin/site-content': typeof AdminSiteContentRoute
   '/admin/student-council': typeof AdminStudentCouncilRoute
+  '/admin/subjects': typeof AdminSubjectsRoute
   '/events/$id': typeof EventsIdRoute
   '/admin/': typeof AdminIndexRoute
   '/events/': typeof EventsIndexRoute
@@ -283,6 +290,7 @@ export interface FileRoutesByTo {
   '/admin/research': typeof AdminResearchRoute
   '/admin/site-content': typeof AdminSiteContentRoute
   '/admin/student-council': typeof AdminStudentCouncilRoute
+  '/admin/subjects': typeof AdminSubjectsRoute
   '/events/$id': typeof EventsIdRoute
   '/admin': typeof AdminIndexRoute
   '/events': typeof EventsIndexRoute
@@ -320,6 +328,7 @@ export interface FileRoutesById {
   '/admin/research': typeof AdminResearchRoute
   '/admin/site-content': typeof AdminSiteContentRoute
   '/admin/student-council': typeof AdminStudentCouncilRoute
+  '/admin/subjects': typeof AdminSubjectsRoute
   '/events/$id': typeof EventsIdRoute
   '/admin/': typeof AdminIndexRoute
   '/events/': typeof EventsIndexRoute
@@ -358,6 +367,7 @@ export interface FileRouteTypes {
     | '/admin/research'
     | '/admin/site-content'
     | '/admin/student-council'
+    | '/admin/subjects'
     | '/events/$id'
     | '/admin/'
     | '/events/'
@@ -393,6 +403,7 @@ export interface FileRouteTypes {
     | '/admin/research'
     | '/admin/site-content'
     | '/admin/student-council'
+    | '/admin/subjects'
     | '/events/$id'
     | '/admin'
     | '/events'
@@ -429,6 +440,7 @@ export interface FileRouteTypes {
     | '/admin/research'
     | '/admin/site-content'
     | '/admin/student-council'
+    | '/admin/subjects'
     | '/events/$id'
     | '/admin/'
     | '/events/'
@@ -596,6 +608,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/subjects': {
+      id: '/admin/subjects'
+      path: '/subjects'
+      fullPath: '/admin/subjects'
+      preLoaderRoute: typeof AdminSubjectsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/student-council': {
       id: '/admin/student-council'
       path: '/student-council'
@@ -716,6 +735,7 @@ interface AdminRouteChildren {
   AdminResearchRoute: typeof AdminResearchRoute
   AdminSiteContentRoute: typeof AdminSiteContentRoute
   AdminStudentCouncilRoute: typeof AdminStudentCouncilRoute
+  AdminSubjectsRoute: typeof AdminSubjectsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
@@ -731,6 +751,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminResearchRoute: AdminResearchRoute,
   AdminSiteContentRoute: AdminSiteContentRoute,
   AdminStudentCouncilRoute: AdminStudentCouncilRoute,
+  AdminSubjectsRoute: AdminSubjectsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
