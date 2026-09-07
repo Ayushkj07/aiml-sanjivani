@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SubjectsRouteImport } from './routes/subjects'
 import { Route as StudentCouncilRouteImport } from './routes/student-council'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as PlacementsRouteImport } from './routes/placements'
@@ -27,6 +28,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as EventsIndexRouteImport } from './routes/events.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as EventsIdRouteImport } from './routes/events.$id'
+import { Route as AdminSubjectsRouteImport } from './routes/admin.subjects'
 import { Route as AdminStudentCouncilRouteImport } from './routes/admin.student-council'
 import { Route as AdminSiteContentRouteImport } from './routes/admin.site-content'
 import { Route as AdminResearchRouteImport } from './routes/admin.research'
@@ -43,6 +45,11 @@ import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 
+const SubjectsRoute = SubjectsRouteImport.update({
+  id: '/subjects',
+  path: '/subjects',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StudentCouncilRoute = StudentCouncilRouteImport.update({
   id: '/student-council',
   path: '/student-council',
@@ -132,6 +139,11 @@ const EventsIdRoute = EventsIdRouteImport.update({
   id: '/events/$id',
   path: '/events/$id',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSubjectsRoute = AdminSubjectsRouteImport.update({
+  id: '/subjects',
+  path: '/subjects',
+  getParentRoute: () => AdminRoute,
 } as any)
 const AdminStudentCouncilRoute = AdminStudentCouncilRouteImport.update({
   id: '/student-council',
@@ -228,6 +240,7 @@ export interface FileRoutesByFullPath {
   '/placements': typeof PlacementsRoute
   '/research': typeof ResearchRoute
   '/student-council': typeof StudentCouncilRoute
+  '/subjects': typeof SubjectsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/achievements': typeof AdminAchievementsRoute
@@ -241,6 +254,7 @@ export interface FileRoutesByFullPath {
   '/admin/research': typeof AdminResearchRoute
   '/admin/site-content': typeof AdminSiteContentRoute
   '/admin/student-council': typeof AdminStudentCouncilRoute
+  '/admin/subjects': typeof AdminSubjectsRoute
   '/events/$id': typeof EventsIdRoute
   '/admin/': typeof AdminIndexRoute
   '/events/': typeof EventsIndexRoute
@@ -262,6 +276,7 @@ export interface FileRoutesByTo {
   '/placements': typeof PlacementsRoute
   '/research': typeof ResearchRoute
   '/student-council': typeof StudentCouncilRoute
+  '/subjects': typeof SubjectsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/achievements': typeof AdminAchievementsRoute
@@ -275,6 +290,7 @@ export interface FileRoutesByTo {
   '/admin/research': typeof AdminResearchRoute
   '/admin/site-content': typeof AdminSiteContentRoute
   '/admin/student-council': typeof AdminStudentCouncilRoute
+  '/admin/subjects': typeof AdminSubjectsRoute
   '/events/$id': typeof EventsIdRoute
   '/admin': typeof AdminIndexRoute
   '/events': typeof EventsIndexRoute
@@ -298,6 +314,7 @@ export interface FileRoutesById {
   '/placements': typeof PlacementsRoute
   '/research': typeof ResearchRoute
   '/student-council': typeof StudentCouncilRoute
+  '/subjects': typeof SubjectsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/achievements': typeof AdminAchievementsRoute
@@ -311,6 +328,7 @@ export interface FileRoutesById {
   '/admin/research': typeof AdminResearchRoute
   '/admin/site-content': typeof AdminSiteContentRoute
   '/admin/student-council': typeof AdminStudentCouncilRoute
+  '/admin/subjects': typeof AdminSubjectsRoute
   '/events/$id': typeof EventsIdRoute
   '/admin/': typeof AdminIndexRoute
   '/events/': typeof EventsIndexRoute
@@ -335,6 +353,7 @@ export interface FileRouteTypes {
     | '/placements'
     | '/research'
     | '/student-council'
+    | '/subjects'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/achievements'
@@ -348,6 +367,7 @@ export interface FileRouteTypes {
     | '/admin/research'
     | '/admin/site-content'
     | '/admin/student-council'
+    | '/admin/subjects'
     | '/events/$id'
     | '/admin/'
     | '/events/'
@@ -369,6 +389,7 @@ export interface FileRouteTypes {
     | '/placements'
     | '/research'
     | '/student-council'
+    | '/subjects'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/achievements'
@@ -382,6 +403,7 @@ export interface FileRouteTypes {
     | '/admin/research'
     | '/admin/site-content'
     | '/admin/student-council'
+    | '/admin/subjects'
     | '/events/$id'
     | '/admin'
     | '/events'
@@ -404,6 +426,7 @@ export interface FileRouteTypes {
     | '/placements'
     | '/research'
     | '/student-council'
+    | '/subjects'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/achievements'
@@ -417,6 +440,7 @@ export interface FileRouteTypes {
     | '/admin/research'
     | '/admin/site-content'
     | '/admin/student-council'
+    | '/admin/subjects'
     | '/events/$id'
     | '/admin/'
     | '/events/'
@@ -440,6 +464,7 @@ export interface RootRouteChildren {
   PlacementsRoute: typeof PlacementsRoute
   ResearchRoute: typeof ResearchRoute
   StudentCouncilRoute: typeof StudentCouncilRoute
+  SubjectsRoute: typeof SubjectsRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   EventsIdRoute: typeof EventsIdRoute
@@ -450,6 +475,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/subjects': {
+      id: '/subjects'
+      path: '/subjects'
+      fullPath: '/subjects'
+      preLoaderRoute: typeof SubjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/student-council': {
       id: '/student-council'
       path: '/student-council'
@@ -576,6 +608,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/subjects': {
+      id: '/admin/subjects'
+      path: '/subjects'
+      fullPath: '/admin/subjects'
+      preLoaderRoute: typeof AdminSubjectsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/student-council': {
       id: '/admin/student-council'
       path: '/student-council'
@@ -696,6 +735,7 @@ interface AdminRouteChildren {
   AdminResearchRoute: typeof AdminResearchRoute
   AdminSiteContentRoute: typeof AdminSiteContentRoute
   AdminStudentCouncilRoute: typeof AdminStudentCouncilRoute
+  AdminSubjectsRoute: typeof AdminSubjectsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
@@ -711,6 +751,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminResearchRoute: AdminResearchRoute,
   AdminSiteContentRoute: AdminSiteContentRoute,
   AdminStudentCouncilRoute: AdminStudentCouncilRoute,
+  AdminSubjectsRoute: AdminSubjectsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
@@ -732,6 +773,7 @@ const rootRouteChildren: RootRouteChildren = {
   PlacementsRoute: PlacementsRoute,
   ResearchRoute: ResearchRoute,
   StudentCouncilRoute: StudentCouncilRoute,
+  SubjectsRoute: SubjectsRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
