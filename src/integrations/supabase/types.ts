@@ -449,6 +449,57 @@ export type Database = {
         }
         Relationships: []
       }
+      subjects: {
+        Row: {
+          code: string
+          created_at: string
+          credits: number | null
+          description: string
+          faculty_name: string
+          id: string
+          image_url: string | null
+          is_visible: boolean
+          name: string
+          notes_url: string | null
+          semester: number
+          sort_order: number
+          syllabus_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          code?: string
+          created_at?: string
+          credits?: number | null
+          description?: string
+          faculty_name?: string
+          id?: string
+          image_url?: string | null
+          is_visible?: boolean
+          name: string
+          notes_url?: string | null
+          semester?: number
+          sort_order?: number
+          syllabus_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          credits?: number | null
+          description?: string
+          faculty_name?: string
+          id?: string
+          image_url?: string | null
+          is_visible?: boolean
+          name?: string
+          notes_url?: string | null
+          semester?: number
+          sort_order?: number
+          syllabus_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
