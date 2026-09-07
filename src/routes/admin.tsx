@@ -26,6 +26,7 @@ const NAV: Array<{ to: string; label: string; icon: typeof LayoutDashboard; exac
   { to: "/admin/student-council", label: "Student Council", icon: UserSquare2 },
   { to: "/admin/achievements", label: "Achievements", icon: Award },
   { to: "/admin/placements", label: "Placements", icon: Briefcase },
+  { to: "/admin/subjects", label: "Subjects", icon: GraduationCap },
   { to: "/admin/research", label: "Research", icon: BookOpen },
   { to: "/admin/news", label: "News", icon: Newspaper },
   { to: "/admin/notices", label: "Notices", icon: Bell },
