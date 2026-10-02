@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { HodEditor } from "@/components/admin/HodEditor";
 
 export const Route = createFileRoute("/admin/site-content")({ component: SiteContentAdmin });
 
@@ -24,7 +25,7 @@ function SiteContentAdmin() {
       <h1 className="text-2xl font-bold">Site Content</h1>
       <p className="text-sm text-muted-foreground">Edit the editable text/image blocks used across the public site.</p>
       <div className="mt-6 space-y-4">
-        {BLOCKS.map((b) => <BlockEditor key={b.key} blockKey={b.key} label={b.label} description={b.description} />)}
+        {BLOCKS.map((b) => b.key === "hod" ? <HodEditor key={b.key} /> : <BlockEditor key={b.key} blockKey={b.key} label={b.label} description={b.description} />)}
       </div>
     </div>
   );

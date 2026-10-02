@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Section } from "@/components/site/Layout";
 import { GallerySlider } from "@/components/site/GallerySlider";
+import { HodMessage } from "@/components/site/HodMessage";
 import { ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -33,7 +34,6 @@ function Home() {
   });
 
   const hero = (content?.home_hero ?? {}) as { title?: string; subtitle?: string; cta_text?: string; cta_link?: string; background_image?: string };
-  const hod = (content?.hod ?? {}) as { name?: string; designation?: string; message?: string; photo_url?: string; qualification?: string };
 
   return (
     <div>
@@ -70,19 +70,7 @@ function Home() {
 
       {/* HOD */}
       <Section>
-        <div className="rounded-lg border p-6 md:p-10 md:flex md:gap-8 md:items-start">
-          {hod.photo_url ? (
-            <img src={hod.photo_url} alt={hod.name} className="size-32 rounded-full object-cover mx-auto md:mx-0" />
-          ) : (
-            <div className="size-32 rounded-full bg-secondary mx-auto md:mx-0 flex items-center justify-center text-3xl font-bold text-muted-foreground">HOD</div>
-          )}
-          <div className="mt-4 md:mt-0 flex-1 text-center md:text-left">
-            <h3 className="text-xl font-bold">{hod.name}</h3>
-            <p className="text-sm text-muted-foreground">{hod.designation}</p>
-            {hod.qualification && <p className="text-sm text-muted-foreground">{hod.qualification}</p>}
-            <p className="mt-4 text-muted-foreground italic">"{hod.message}"</p>
-          </div>
-        </div>
+        <HodMessage />
       </Section>
 
       {/* Latest news + events */}
